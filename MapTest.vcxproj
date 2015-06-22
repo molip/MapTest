@@ -102,10 +102,8 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="ChildView.h" />
+    <ClInclude Include="ControlsDlg.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MapTest.h" />
     <ClInclude Include="Resource.h" />
@@ -114,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChildView.cpp" />
+    <ClCompile Include="ControlsDlg.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MapTest.cpp" />
     <ClCompile Include="stdafx.cpp">

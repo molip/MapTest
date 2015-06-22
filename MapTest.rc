@@ -72,7 +72,7 @@ BEGIN
     END
     POPUP "&Actions"
     BEGIN
-        MENUITEM "Noise",                       ID_ACTIONS_NOISE
+        MENUITEM "Test",                        ID_ACTIONS_TEST
     END
 END
 
@@ -264,6 +264,46 @@ END
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
 #pragma code_page(1252)
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CONTROLS DIALOGEX 0, 0, 116, 178
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_VISIBLE | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Animate Z",IDC_CHECK_ANIMATE_Z,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,32,49,10
+    CONTROL         "Animate Y",IDC_CHECK_ANIMATE_Y,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,20,49,10
+    CONTROL         "Animate X",IDC_CHECK_ANIMATE_X,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,50,10
+    CONTROL         "",IDC_SLIDER_THRESHOLD_LOW,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,62,100,12
+    CONTROL         "",IDC_SLIDER_THRESHOLD_HIGH,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,82,100,12
+    CONTROL         "",IDC_SLIDER_QUANTISE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,108,100,12
+    LTEXT           "Low",IDC_STATIC,7,49,14,8
+    LTEXT           "High",IDC_STATIC,7,73,15,8
+    LTEXT           "Quantise",IDC_STATIC,7,97,30,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_CONTROLS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 109
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 171
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -300,6 +340,17 @@ BEGIN
 END
 
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_CONTROLS AFX_DIALOG_LAYOUT
+BEGIN
+    0x0000
+END
 
 #endif    // English (United Kingdom) resources
 /////////////////////////////////////////////////////////////////////////////

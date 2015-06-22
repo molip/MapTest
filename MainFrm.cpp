@@ -16,6 +16,7 @@ IMPLEMENT_DYNAMIC(CMainFrame, CFrameWnd)
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_SETFOCUS()
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -28,7 +29,7 @@ static UINT indicators[] =
 
 // CMainFrame construction/destruction
 
-CMainFrame::CMainFrame()
+CMainFrame::CMainFrame() : m_controlsDlg(m_wndView)
 {
 	// TODO: add member initialization code here
 }
@@ -68,6 +69,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	EnableDocking(CBRS_ALIGN_ANY);
 	DockControlBar(&m_wndToolBar);
 
+	m_controlsDlg.Create(IDD_CONTROLS, this);
 
 	return 0;
 }
@@ -86,6 +88,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 void CMainFrame::SetStatus(const CChildView::Status& status)
 {
 	std::wostringstream ss;
+	ss << "Noise: " << status.noiseTime << L"ms Trace:" << status.traceTime << L"ms";
 	m_wndStatusBar.SetPaneText(0, ss.str().c_str());
 }
 
@@ -122,3 +125,25 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*
 	return CFrameWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
+
+
+void CMainFrame::OnSize(UINT nType, int cx, int cy)
+{
+	CFrameWnd::OnSize(nType, cx, cy);
+
+	CRect rClient;
+	GetClientRect(rClient);
+
+	CRect rView;
+	m_wndView.GetWindowRect(rView);
+	ScreenToClient(rView);
+
+	CRect rControls;
+	m_controlsDlg.GetWindowRect(rControls);
+	rControls.MoveToXY(rClient.right - rControls.Width(), rView.top);
+	rControls.bottom = rView.bottom;
+	m_controlsDlg.MoveWindow(rControls);
+
+	rView.right = rControls.left;
+	m_wndView.MoveWindow(rView);
+}

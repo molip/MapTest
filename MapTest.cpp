@@ -97,6 +97,14 @@ int CMapTestApp::ExitInstance()
 	return CWinApp::ExitInstance();
 }
 
+BOOL CMapTestApp::OnIdle(LONG lCount)
+{
+	int ret = __super::OnIdle(lCount);
+	CChildView::Get()->Pump();
+	return ret;
+}
+
+
 // CMapTestApp message handlers
 
 

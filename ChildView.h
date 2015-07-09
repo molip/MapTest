@@ -5,7 +5,15 @@
 #include "Jig/Polygon.h"
 #include "Jig/PathFinder.h"
 
-class CChildView : public CWnd
+#include "libKernel/Singleton.h"
+
+namespace sf
+{
+	class RenderWindow;
+	class Clock;
+}
+
+class CChildView : public CWnd, public Kernel::Singleton<CChildView>
 {
 public:
 	CChildView();
@@ -16,12 +24,17 @@ public:
 		int noiseTime, traceTime;
 	};
 
+	void Pump();
+
 	void ToggleAnimateX();
 	void ToggleAnimateY();
 	void ToggleAnimateZ();
+	void Toggle3D();
 	void SetThresholdLow(double val);
 	void SetThresholdHigh(double val);
 	void SetQuantise(int val);
+	void SetRotateX(int val);
+	void SetRotateY(int val);
 
 	bool GetNoise(int x, int y, int interval) const;
 
@@ -43,7 +56,7 @@ protected:
 	
 	HBITMAP m_bgBitmap = nullptr;
 	COLORREF* m_data = nullptr;
-	CSize m_bitmapSize = {};
+	CSize m_bitmapSize = {1000, 1000};
 	bool m_bitmapValid = false;
 	
 	std::vector<Jig::PolyPolygon> m_polypolys;
@@ -53,9 +66,13 @@ protected:
 
 	double m_x = 0, m_y = 0, m_z = 0;
 	double m_scale = 0.02;
-	bool m_isAnimateX = false, m_isAnimateY = false, m_isAnimateZ = false;
-	double m_thresholdLow = 0, m_thresholdHigh = 0.9;
-	int m_quantise = 1;
+	bool m_isAnimateX = false, m_isAnimateY = false, m_isAnimateZ = false, m_is3D = false;
+	double m_thresholdLow = 0.25, m_thresholdHigh = 1.0;
+	int m_quantise = 8;
+
+	int m_rotateX = 20, m_rotateY = 0;
+
+	std::unique_ptr<sf::RenderWindow> m_window;
 
 public:
 	DECLARE_MESSAGE_MAP()

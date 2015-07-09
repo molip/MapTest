@@ -13,6 +13,10 @@
 #define IDC_SLIDER_THRESHOLD_HIGH       1005
 #define IDC_SLIDER_THRESHOLD_HIGH2      1006
 #define IDC_SLIDER_QUANTISE             1006
+#define IDC_SLIDER_ROTATE_X             1007
+#define IDC_SLIDER_ROTATE_Y             1008
+#define IDC_CHECK_ANIMATE_Z2            1009
+#define IDC_CHECK_3D                    1009
 #define ID_ACTIONS                      32790
 #define ID_ACTIONS_TEST                 32791
 
